@@ -8,11 +8,11 @@ var knex = require('knex')({
         database: settings.database
     }
 });
+const famousPeopleKnex = require('./famous_peopleKnex')(knex);
 
 
-knex.select().from("famous_people").where({ last_name: process.argv[2] })
-.asCallback(function (err, rows) {
-        if (err) return console.error(err);
-            console.log(`- ${rows[0].id}: ${rows[0].last_name}
-            ${rows[0].first_name}, born '${rows[0].birthdate}'`);
-        });
+famousPeopleKnex.findByName(function (err, rows) {
+    if (err) return console.error(err);
+    console.log(`- ${rows[0].id}: ${rows[0].first_name} ${rows[0].last_name}, born '${rows[0].birthdate}'`);
+    process.exit();
+});
