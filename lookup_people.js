@@ -16,7 +16,7 @@ client.connect((err) => {
     }
     console.log('Searching...');
 
-    famousPeop                                                                    <   le.findByName(client, process.argv[2], (err, result) => {
+    famousPeople.findByName(client, process.argv[2], (err, result) => {
         if (err) {
             return console.log('Something went wrong:', err)
         }
