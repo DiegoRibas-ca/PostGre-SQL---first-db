@@ -1,6 +1,5 @@
 const pg = require("pg");
 const settings = require("./settings"); // settings.json
-
 const client = new pg.Client({
     user: settings.user,
     password: settings.password,
@@ -9,6 +8,7 @@ const client = new pg.Client({
     port: settings.port,
     ssl: settings.ssl
 });
+const famousPeople = require('./famous_people')(client);
 
 client.connect((err) => {
     if (err) {
@@ -16,14 +16,7 @@ client.connect((err) => {
     }
     console.log('Searching...');
 
-
-
-    const findByName = function (client, name, callback) {
-        const query = "SELECT * from famous_people WHERE last_name = $1;";
-        client.query(query, [name], callback);
-    }
-
-    findByName(client, process.argv[2], (err, result) => {
+    famousPeop                                                                    <   le.findByName(client, process.argv[2], (err, result) => {
         if (err) {
             return console.log('Something went wrong:', err)
         }
