@@ -1,13 +1,6 @@
 const settings = require("./settings"); // settings.json
-var knex = require('knex')({
-    client: 'pg',
-    connection: {
-        host: settings.hostname,
-        user: settings.user,
-        password: settings.password,
-        database: settings.database
-    }
-});
+const knexConfig = require('./knexfile');
+var knex = require('knex')(knexConfig['development']);
 const famousPeopleKnex = require('./famous_peopleKnex')(knex);
 
 
